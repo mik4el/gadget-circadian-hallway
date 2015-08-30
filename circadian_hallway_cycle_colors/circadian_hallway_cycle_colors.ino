@@ -18,7 +18,7 @@ unsigned long TIME_color = 0;
 
 //Evening colors defined here
 #define C1_R 200
-#define C1_G 0
+#define C1_G 10
 #define C1_B 0
 
 #define C2_R 225
@@ -33,8 +33,8 @@ unsigned long TIME_color = 0;
 #define C4_G 30
 #define C4_B 0
 
-#define C5_R 200
-#define C5_G 00
+#define C5_R 150
+#define C5_G 10
 #define C5_B 0
 
 void setup()
