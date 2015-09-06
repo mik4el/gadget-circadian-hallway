@@ -96,6 +96,8 @@ void setup()
   analogWrite(GRN_PIN, 0);
   analogWrite(RED_PIN, 0);
   analogWrite(BLU_PIN, 0);
+
+  Serial.begin(9600);
 }
 
 void loop()
@@ -114,6 +116,22 @@ void loop()
     color();
   }
 
+  while (Serial.available() > 0) {
+    int red = Serial.parseInt();
+    int green = Serial.parseInt();
+    int blue = Serial.parseInt();
+    if (Serial.read() == '\n') {
+      if (red == 255) {
+        turn_on_evening_colors();  
+      }
+      if (blue == 255) {
+        turn_on_morning_colors();  
+      }
+      Serial.print(red, HEX);
+      Serial.print(green, HEX);
+      Serial.println(blue, HEX);
+    }
+  }
 }
 
 void LED()
