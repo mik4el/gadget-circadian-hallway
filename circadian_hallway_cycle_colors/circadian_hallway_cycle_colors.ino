@@ -39,30 +39,30 @@ boolean is_using_morning_colors = true;
 #define E_C5_G 10
 #define E_C5_B 0
 
-#define E_MAX_COLOR_DIFFERENCE 55
+#define E_MAX_COLOR_DIFFERENCE 105
 
 //Morning colors defined here
 #define M_C1_R 145
 #define M_C1_G 13
-#define M_C1_B 255
+#define M_C1_B 200
 
 #define M_C2_R 72
 #define M_C2_G 12
-#define M_C2_B 232
+#define M_C2_B 200
 
-#define M_C3_R 0
-#define M_C3_G 0
-#define M_C3_B 255
+#define M_C3_R 255
+#define M_C3_G 255
+#define M_C3_B 150
 
-#define M_C4_R 12
-#define M_C4_G 70
-#define M_C4_B 232
+#define M_C4_R 50
+#define M_C4_G 90
+#define M_C4_B 150
 
 #define M_C5_R 13
 #define M_C5_G 140
-#define M_C5_B 255
+#define M_C5_B 200
 
-#define M_MAX_COLOR_DIFFERENCE 145
+#define M_MAX_COLOR_DIFFERENCE 243
 
 void turn_on_morning_colors()
 {
