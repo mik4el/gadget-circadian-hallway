@@ -1,4 +1,4 @@
-# circadian_hallway
+# Circadian Hallway
 Control color and intensity of led strips in a hallway to match optimal human circadian rhythm. Arduino and python interface to custom electronics for 200W RGB leds.
 
 # Suggested hardware
@@ -17,6 +17,7 @@ reboot
 Quick and dirty, set it up in crontab.
 
 # Todos
+1. Better hardware
 1. Take serial commands from python with color and animation time, animate to that color in the given time.
-1. Deploy script to raspi.
+1. Deploy to raspi using Docker.
 1. Put color command in python rather than in arduino, have python command that sets color for circadian rythm depending on time of day.
