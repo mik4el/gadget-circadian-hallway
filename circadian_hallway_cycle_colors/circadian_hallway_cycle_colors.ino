@@ -1,6 +1,6 @@
-#define GRN_PIN 5
+#define GRN_PIN 9
 #define RED_PIN 6
-#define BLU_PIN 9
+#define BLU_PIN 5
 
 byte RED, GREEN, BLUE; 
 byte RED_A = 0;
@@ -19,48 +19,48 @@ unsigned long TIME_color = 0;
 boolean is_using_morning_colors = true;
 
 //Evening colors defined here
-#define E_C1_R 200
-#define E_C1_G 10
+#define E_C1_R 255
+#define E_C1_G 61
 #define E_C1_B 0
 
-#define E_C2_R 225
-#define E_C2_G 20
+#define E_C2_R 255
+#define E_C2_G 10
 #define E_C2_B 0
 
-#define E_C3_R 255
-#define E_C3_G 40
+#define E_C3_R 100
+#define E_C3_G 25
 #define E_C3_B 0
 
-#define E_C4_R 245
-#define E_C4_G 30
+#define E_C4_R 150
+#define E_C4_G 10
 #define E_C4_B 0
 
-#define E_C5_R 150
-#define E_C5_G 10
+#define E_C5_R 200
+#define E_C5_G 50
 #define E_C5_B 0
 
 #define E_MAX_COLOR_DIFFERENCE 105
 
 //Morning colors defined here
-#define M_C1_R 145
-#define M_C1_G 13
-#define M_C1_B 200
+#define M_C1_R 50
+#define M_C1_G 50
+#define M_C1_B 50
 
-#define M_C2_R 72
-#define M_C2_G 12
-#define M_C2_B 200
+#define M_C2_R 20
+#define M_C2_G 20
+#define M_C2_B 20
 
-#define M_C3_R 255
-#define M_C3_G 255
+#define M_C3_R 150
+#define M_C3_G 150
 #define M_C3_B 150
 
-#define M_C4_R 50
-#define M_C4_G 90
-#define M_C4_B 150
+#define M_C4_R 100
+#define M_C4_G 100
+#define M_C4_B 100
 
-#define M_C5_R 13
-#define M_C5_G 140
-#define M_C5_B 200
+#define M_C5_R 255
+#define M_C5_G 255
+#define M_C5_B 255
 
 #define M_MAX_COLOR_DIFFERENCE 243
 
