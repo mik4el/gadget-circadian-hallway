@@ -16,7 +16,7 @@ if args.evening:
 if args.morning:
 	# For morning mode:
 	ser.write("0,0,255\n")
-if args.morning:
+if args.night:
 	# For night mode:
 	ser.write("0,255,0\n")
 
