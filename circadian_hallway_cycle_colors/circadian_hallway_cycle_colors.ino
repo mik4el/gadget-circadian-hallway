@@ -1,3 +1,5 @@
+// Tested on Arduino Pro Micro 5V 16 MHz 
+
 #define GRN_PIN 9
 #define RED_PIN 6
 #define BLU_PIN 5
@@ -7,18 +9,24 @@ byte RED_A = 0;
 byte GREEN_A = 0; 
 byte BLUE_A = 0;
 int led_delay = 0;
-byte color_count = 1;                //Count the colors out
-#define color_count_max 5              //Set this to the max number of colors defined
-#define color_delay 60000             //Define the delay between changing colors in ms
-#define time_at_color 0           //Time to stay on a color in ms
+byte color_count = 1;     // Count the colors out
+#define color_count_max 5 // Set this to the max number of colors defined
+#define color_delay 60000 // Define the delay between changing colors in ms
+#define time_at_color 0   // Time to stay on a color in ms
 
-//Some Time values
+// Some Time values
 unsigned long TIME_LED = 0;
 unsigned long TIME_PHASE = 0;
 unsigned long TIME_color = 0;
 boolean is_using_morning_colors = true;
+boolean is_using_night_color = true;
 
-//Evening colors defined here
+// Night color defined here
+#define N_C1_R 4
+#define N_C1_G 1
+#define N_C1_B 0
+
+// Evening colors defined here
 #define E_C1_R 255
 #define E_C1_G 61
 #define E_C1_B 0
@@ -41,7 +49,7 @@ boolean is_using_morning_colors = true;
 
 #define E_MAX_COLOR_DIFFERENCE 105
 
-//Morning colors defined here
+// Morning colors defined here
 #define M_C1_R 50
 #define M_C1_G 50
 #define M_C1_B 50
@@ -66,11 +74,11 @@ boolean is_using_morning_colors = true;
 
 void turn_on_morning_colors()
 {
-  //Assign initial values
+  // Assign initial values
   RED = M_C1_R;
   GREEN = M_C1_G;
   BLUE = M_C1_B;
-  //Get the led_delay speed
+  // Get the led_delay speed
   led_delay = (color_delay - time_at_color) / M_MAX_COLOR_DIFFERENCE; 
   if (led_delay > 41) led_delay = 41;
   is_using_morning_colors = true;
@@ -78,20 +86,31 @@ void turn_on_morning_colors()
 
 void turn_on_evening_colors()
 {
-  //Assign initial values
+  // Assign initial values
   RED = E_C1_R;
   GREEN = E_C1_G;
   BLUE = E_C1_B;
-  //Get the led_delay speed
+  // Get the led_delay speed
   led_delay = (color_delay - time_at_color) / E_MAX_COLOR_DIFFERENCE; 
   if (led_delay > 41) led_delay = 41;
   is_using_morning_colors = false;
 }
 
+void turn_on_night_color()
+{
+  // Assign initial values
+  RED = N_C1_R;
+  GREEN = N_C1_G;
+  BLUE = N_C1_B;
+  // Get the led_delay speed
+  led_delay = (color_delay - time_at_color) / E_MAX_COLOR_DIFFERENCE; 
+  if (led_delay > 41) led_delay = 41;
+  is_using_night_color = true;
+}
+
 void setup()
 {
-  turn_on_morning_colors();
-  //turn_on_evening_colors();
+  turn_on_night_color();
   
   analogWrite(GRN_PIN, 0);
   analogWrite(RED_PIN, 0);
@@ -105,14 +124,14 @@ void loop()
   if (millis() - TIME_LED >= led_delay) {
     TIME_LED = millis();
 
-    //Run the LED Function to check and adjust the values
+    // Run the LED Function to check and adjust the values
     LED();
   }
 
   if (millis() - TIME_color >= color_delay) {
     TIME_color = millis();
 
-    //Run the color Change function
+    // Run the color change function
     color();
   }
 
@@ -123,6 +142,9 @@ void loop()
     if (Serial.read() == '\n') {
       if (red == 255) {
         turn_on_evening_colors();  
+      }
+      if (green == 255) {
+        turn_on_night_color();  
       }
       if (blue == 255) {
         turn_on_morning_colors();  
@@ -136,7 +158,7 @@ void loop()
 
 void LED()
 {
-  //Check Values and adjust "Active" Value
+  // Check Values and adjust "Active" Value
   if (RED != RED_A) {
     if (RED_A > RED) RED_A = RED_A - 1;
     if (RED_A < RED) RED_A++;
@@ -150,7 +172,7 @@ void LED()
     if (BLUE_A < BLUE) BLUE_A++;
   }
 
-  //Assign modified values to the pwm outputs for each color led
+  // Assign modified values to the pwm outputs for each color led
   analogWrite(RED_PIN, RED_A);
   analogWrite(GRN_PIN, GREEN_A);
   analogWrite(BLU_PIN, BLUE_A);
@@ -158,7 +180,11 @@ void LED()
 
 void color()
 {
-  //Increment the color by one or go back to 1 if maxed out
+  if (is_using_night_color) {
+    return;
+  }
+  
+  // Increment the color by one or go back to 1 if maxed out
   if (color_count < color_count_max) {
     color_count++;
   } else {
